@@ -22,18 +22,20 @@ import sys
 def runQuery (seq,query,x,y,lastAns,n):
    answer = 0
    calc_index = (x ^ lastAns) % n;
-   if (query==1):
-      seq[calc_index].append(y)
-      return 0 
-   elif (query==2):
-      answer = seq[calc_index][y%n]
-      return answer
+   if (calc_index < n and calc_index >=0):
+       if (query==1):
+          seq[calc_index].append(y)
+          return 0 
+       elif (query==2):
+          answer = seq[calc_index][y%n]
+          return answer
 
 
 """
    main() is not needed , added to simply block it
    reads n,q and calls RunQuery with the sequence prepared already
 """
+
 def main():
    # read n , q  
    n,q = input().strip().split(' ')
@@ -56,8 +58,32 @@ def main():
    for x in answerlist:
       print(x)
 
+"""
+    test : method which performs test of main with input from file instead of console
+    -- in future we can customize it in better way to make it work with input from file or input from console
+    --- in a better way
+"""
+def test():
+   # read n , q  
+   n,q = input().strip().split(' ')
+   n,q = int(n),int(q)
+   lastAns = 0
+   answerlist =[]
 
+   querylist =[]
+   seq =[]
+   for t in range(n):
+      seq.append([])
 
+   for i in range(q):
+      qt,x,y = input().strip().split(' ')
+      qt,x,y = int(qt),int(x),int(y)
+      lastAns = runQuery(seq,qt,x,y,lastAns,n)
+      if (qt==2):
+         answerlist.append(lastAns)
+
+   for x in answerlist:
+      print(x)
 main()
       
        
