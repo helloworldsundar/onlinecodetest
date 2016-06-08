@@ -17,9 +17,20 @@ public class TwoDArrayDS {
                    arr[arr_i][arr_j] = in.nextInt();
                }
            }
-
-           int result = getHourGlassSum(arr,0,0,3);
-           System.out.println("Sum of hourglass"+result);
+           in.close();
+           int maxSum = Integer.MIN_VALUE;
+           int result = 0;
+           
+           for(int arr_i=0; arr_i < 6; arr_i++){
+               for(int arr_j=0; arr_j < 6; arr_j++){
+                  result = getHourGlassSum(arr,arr_i,arr_j,3);
+                  if(maxSum < result)
+                  {
+                     maxSum = result;
+                  }
+               }
+           }
+           System.out.println(maxSum);
        }
        
        /**
@@ -37,30 +48,28 @@ public class TwoDArrayDS {
           
           for (int iteration = 1; iteration <= hrSize; iteration++)
           {
-             if (iteration == median)
+            try
+            {
+                if (iteration == median)
+                {
+                   sumOfHourGlass += arr[positioni+1][positionj];
+                }
+                sumOfHourGlass += arr[positioni][positionj];
+                sumOfHourGlass += arr[positioni+2][positionj];
+                
+            }catch(ArrayIndexOutOfBoundsException exec)
              {
-                sumOfHourGlass += arr[positioni+1][positionj];
-             }
-             sumOfHourGlass += arr[positioni][positionj];
-             sumOfHourGlass += arr[positioni+2][positionj];
+                 // So Hour Glass cannot be prepared at this index
+                 //mark sum as '0' as this point and return
+                 sumOfHourGlass = Integer.MIN_VALUE;
+                 break;
+                 // Note : explicitly set sumOfHourGlass as min value , because
+                 // it may include partial Sum  from the point of Assumption
+                 // an hour glass exists
+              }
 
              positionj++; // traverse the column in matrix for getting other elems from hr glass
           }
-             
-          
-          try
-          {
-             
-          }catch(ArrayIndexOutOfBoundsException exec)
-          {
-             // So Hour Glass cannot be prepared at this index
-             //mark sum as '0' as this point and return
-             sumOfHourGlass = 0;
-             // Note : explicitly set sumOfHourGlass as 0 , because
-             // it may include partial Sum  from the point of Assumption
-             // an hour glass exists
-          }
-          
           return sumOfHourGlass;
        }
        
