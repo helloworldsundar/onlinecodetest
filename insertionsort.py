@@ -4,14 +4,10 @@ def insertionsort(arr):
     n = len(arr)
     for i in range(1, n):
         ccard = arr[i]
-        print(ccard)
         j = i
-        while (j >= 0):
-            if arr[j-1] > ccard:
-                arr[j] = arr[j-1]
-                j = j - 1
-            else:
-                break
+        while (j>0) and (arr[j-1] > ccard):
+            arr[j] = arr[j-1]
+            j = j - 1
         arr[j] = ccard
     return arr
 
