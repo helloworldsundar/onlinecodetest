@@ -7,33 +7,13 @@ class Solution {
 
 };
 
-class Node {
-protected:
-   void* data;
-   Node* next;
-public:
-   void* getData(){return this->data;};
-   Node* getNext(){return this->next;};
-   void setData(void* data){this->data=data;};
-   void setNext(Node* next){this->next=next;};
-};
-
-class CharNode:Node{
-public:
-   char getData(){return *((char*)this->data);};
-   void setData(char* c){this->data = &c;};
-};
-
 
 class Stack{
-private:
-   Node* head;
-public:
-   
-
-
+   Node* top;
+   Stack(){
+      `:q
+   }
 };
-
 //Below text , assume it is read only
 
 int main() {
